@@ -1,0 +1,56 @@
+// Implementación en Java del algoritmo de agendamiento Round Robin. La animación corresponde al ejemplo desarrollado en este código. 
+// Se ilustra el caso estático, dónde ya hay una cola predefinida que pasa por el algoritmo, ya que facilita su explicación. 
+
+
+public class RoundRobin {
+
+    static class Nodo {
+        String id;
+        int resta;
+        Nodo sig;
+
+        Nodo(String id, int resta) {
+            this.id = id;
+            this.resta = resta;
+        }
+    }
+
+    static void roundRobin(Nodo ultimo, int q) {
+        if (ultimo == null) return;
+        Nodo prev = ultimo, actual = ultimo.sig;
+        int reloj = 0;
+        while (true) {
+            int usa = Math.min(q, actual.resta);
+            actual.resta -= usa;
+            reloj += usa;
+            if (actual.resta > 0) {
+                prev = actual;
+                actual = actual.sig;
+            } else {
+                System.out.println(actual.id + " termina en t=" + reloj);
+                if (actual.sig == actual) break;
+                prev.sig = actual.sig;
+                actual = actual.sig;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Nodo ana = new Nodo("Ana", 20);
+        Nodo carlos = new Nodo("Carlos", 10);
+        Nodo laura = new Nodo("Laura", 5);
+        Nodo daniel = new Nodo("Daniel", 15);
+        Nodo mariana = new Nodo("Mariana", 7);
+        Nodo felipe = new Nodo("Felipe", 3);
+
+        ana.sig = carlos;
+        carlos.sig = laura;
+        laura.sig = daniel;
+        daniel.sig = mariana;
+        mariana.sig = felipe;
+        felipe.sig = ana;
+
+        roundRobin(felipe, 5);
+    }
+}
+
