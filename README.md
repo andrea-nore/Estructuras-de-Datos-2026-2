@@ -1,5 +1,5 @@
 # Curso Estructuras de Datos 2026-2
-## Presentación - Algoritmo RoundRobin
+## Presentación 1 - Algoritmo RoundRobin. (Octubre 21, 2026)
 Presentado por grupo 4:
 - Alejandro Borda
 - Esteban Gaona
